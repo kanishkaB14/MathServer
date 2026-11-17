@@ -1,0 +1,13 @@
+views.py
+
+from django.shortcuts import render
+
+def Churn Rate(request):
+    if request.method=="POST":
+        initialcust=int(request.POST.get("initialcust"))
+        PresentCust=int(request.POST.get("PresentCust"))
+        Churn Rate=initialcust*PresentCust
+        print(f"Length of Rectangle: {initialCust}cm \n Width: {PresentCust}cm \n Area os Rectangle: {Churn Rate}")
+    return render(request, "mathapp/area.html",{"initialcust":initialCust , "PresentCust": PresentCust, "Churn Rate": Churn Rate})
+
+
