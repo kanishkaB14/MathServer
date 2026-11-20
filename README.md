@@ -45,66 +45,65 @@ Publish the website in Localhost.
 ```
 <html>
     <head>
-        <title>Calculation1</title>
+        <title>Math</title>
     </head>
     <body>
-        <center>
-            <h1>KANISHKA B</h1>
-            <h1>(26010203)</h1>
-        
+        <h1>KANISHKA B (26010203)</h1>
+        <h2>CHURN RATE CALCULATON</h2>
+
         <form method="POST">
-            {%csrf_token%}
-            <label>Initial_Customer</label>
-            <input type="number" name="initial_Customer" value="{{ initial }}" required> <br><br>
-            <label>Present_Customer</label>
-            <input type="number" name="present_Customer" value="{{ present }}" required> <br><br>
-            <h2>Calculate Churn Rate</h2>
-            <input type="submit" value="Calculate" >
-            <input type="text" value="{% if result is not None %}{{ result }}%{% endif %}" readonly>
-            <input type="reset" value="Clear All">
-
-
-
-        </form> 
-        {% if result is not None %}
-            <h2>Churn Rate: {{ result }}%</h2>
-        {% endif %}
-        </center>
+          {% csrf_token %}
+            
+            <label>Customers lost count:</label>
+            <input type="number"  value="{{ Customers_count }}" name="length">
+            <br><br>
+            
+            <label>Initial Customers count:</label>
+            <input type="number"  value="{{ Initial_Customer }}" name="breadth">
+            <br><br>
+            
+            <input type="submit" value="calculate">
+            <br><br>
+            
+            <label>Churn Rate count:</label>
+            <input type="number"  value="{{ area }}" >
+        </form>
     </body>
 </html>
-```
-python
-```
-from django.shortcuts import render
 
-def calculate_Churn(request):
-    result = None
-    initial = ""
-    present = ""
-    if request.method == "POST":
-        initial = request.POST.get("initial_Customer")
-        present = request.POST.get("present_Customer")
-        if initial and present and int(initial) != 0:
-            result = round(((int(initial) - int(present)) / int(initial)) * 100, 2)
-    return render(request, "mysivan/mysivan.html", {
-        "result": result,
-        "initial": initial,
-        "present": present
-    })
+views.py
+
+from django.shortcuts import render
+def cumchurn_area(request):
+     Customers_count = float(request.POST.get('length', '0'))
+     Initial_Customer   = float(request.POST.get('breadth', '0'))
+     area =( Customers_count / Initial_Customer)*100 if request.method == 'POST' else 0
+
+     print("Customers lost count =", Customers_count)
+     print("Initial customers count =", Initial_Customer)
+     print("Churn Rate =", area)
+
+     return render(
+        request,
+        'mymoni/moni.html',
+        {'Customers_count': Customers_count, 'Initial_Customer': Initial_Customer, 'area': area}
+    )
+
+urls.py
+
 from django.contrib import admin
 from django.urls import path
-from mysivan import views
+from mymoni import views
 
-urlpatterns=[
-    path('admin/', admin.site.urls),
-    path('',views.calculate_Churn,name='calculate'),
+urlpatterns = [
+    path('', views. cumchurn_area, name='cumchurn_area'),
 ]
 
 ```
 
 ## OUTPUT 
-![alt text](<Screenshot (15).png>)
-![alt text](<Screenshot (14).png>)
+![alt text](<Screenshot 2026-11-20 125057.png>)
+![alt text](<Screenshot 2026-11-20 125125.png>)
 
 
 
