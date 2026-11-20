@@ -5,5 +5,3 @@ from mymoni import views
 urlpatterns = [
     path('', views. cumchurn_area, name='cumchurn_area'),
 ]
-
-

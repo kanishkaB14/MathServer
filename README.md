@@ -102,8 +102,8 @@ urlpatterns = [
 ```
 
 ## OUTPUT 
-![alt text](<Screenshot 2026-11-20 125057.png>)
-![alt text](<Screenshot 2026-11-20 125125.png>)
+![alt text](<Screenshot 2026-11-20 132330.png>)
+![alt text](<Screenshot 2026-11-20 132403.png>)
 
 
 

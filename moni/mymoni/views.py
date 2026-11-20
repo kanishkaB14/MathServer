@@ -1,5 +1,4 @@
 from django.shortcuts import render
-
 def cumchurn_area(request):
      Customers_count = float(request.POST.get('length', '0'))
      Initial_Customer   = float(request.POST.get('breadth', '0'))
